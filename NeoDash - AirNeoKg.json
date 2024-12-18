@@ -1,0 +1,1111 @@
+{
+  "title": "AirNeoKG",
+  "version": "2.4",
+  "settings": {
+    "pagenumber": 6,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {
+      "neodash_clientCname": "00:D7:6D:11:01:20",
+      "neodash_wccfullvalue": 1092,
+      "neodash_wccfullvalue_display": 1092
+    },
+    "theme": "light"
+  },
+  "pages": [
+    {
+      "title": "AirNeoKG",
+      "reports": [
+        {
+          "id": "9b9c24a4-6154-43e7-94f9-3bb7e7c241af",
+          "title": "AirNeoKg",
+          "query": "https://felipe-nunes.github.io/airneokg/main.html",
+          "width": 5,
+          "height": 3,
+          "x": 0,
+          "y": 0,
+          "type": "iframe",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        },
+        {
+          "id": "ed1637db-cca1-43e5-aab1-eea64862eebe",
+          "title": "AirNeoKG Graph Model Stats",
+          "query": "// Conta o número total de nós\nMATCH (n)\nWITH COUNT(n) AS totalNodes\n\n// Conta o número total de relacionamentos\nMATCH ()-[r]->()\nWITH totalNodes, COUNT(r) AS totalRelationships\n\n// Calcula o número total de propriedades nos nós\nMATCH (n)\nWITH totalNodes, totalRelationships, SUM(size(keys(n))) AS totalNodeProperties\n\n// Calcula o número total de propriedades nos relacionamentos\nMATCH ()-[r]->()\nWITH totalNodes, totalRelationships, totalNodeProperties, SUM(size(keys(r))) AS totalRelProperties\n\n// Prepara dados para UNWIND\nWITH [\n    ['Total Nodes', totalNodes],\n    ['Total Relationships', totalRelationships],\n    ['Total Node Properties', totalNodeProperties],\n    ['Total Relationship Properties', totalRelProperties],\n    ['Average Relationships Per Node', totalRelationships / totalNodes],\n    ['Average Properties Per Element', (totalNodeProperties + totalRelProperties) / (totalNodes + totalRelationships)]\n] AS results\n\n// Retorna cada par de chave-valor como uma linha separada\nUNWIND results AS result\nRETURN result[0] AS Metric, result[1] AS Value\n",
+          "width": 5,
+          "height": 5,
+          "x": 0,
+          "y": 3,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "columnWidths": "[3,1]"
+          }
+        },
+        {
+          "id": "205acd91-3cee-40b7-8ba3-2b6daa0ee496",
+          "title": "AirNeoKG Graph Model",
+          "query": "call db.schema.visualization \n\n",
+          "width": 19,
+          "height": 8,
+          "x": 5,
+          "y": 0,
+          "type": "graph",
+          "selection": {
+            "Access Point Security Posture": "name",
+            "WIFI Device Mobility": "name",
+            "SSID Snapshot": "name",
+            "WIFI Bridge Signal": "name",
+            "Client Signal": "name",
+            "Access Point Signal": "name",
+            "Client Device Mobility": "name",
+            "WIFI Device Performance": "name",
+            "WIFI Device": "name",
+            "WIFI Bridge Snapshot": "name",
+            "_Neodash_Dashboard": "name",
+            "Client Performance": "name",
+            "Access Point Device Mobility": "name",
+            "WIFI Bridge Performance": "name",
+            "Client": "name",
+            "SSID": "name",
+            "Client Security Posture": "name",
+            "WIFI Bridge": "name",
+            "WIFI Device Security Posture": "name",
+            "Access Point": "name",
+            "WIFI Device Signal": "name",
+            "WIFI Bridge Security Posture": "name",
+            "WIFI Bridge Device Mobility": "name",
+            "Client Snapshot": "name",
+            "Access Point Performance": "name",
+            "Access Point Snapshot": "name",
+            "WIFI Device Snapshot": "name",
+            "ASSOCIATED_TO_WIFI_BRIDGE_DEVICE_MOBILITY": "name",
+            "NEXT_SSID_SNAPSHOT": "name",
+            "ASSOCIATED_TO_WIFI_DEVICE_SIGNAL": "name",
+            "RESPONDING_FOR_SSID_AP": "name",
+            "ASSOCIATED_TO_WIFI_BRIDGE_SNAPSHOT_LAST": "name",
+            "ASSOCIATED_TO_SSID_SNAPSHOT_LAST": "name",
+            "ASSOCIATED_TO_ACCESS_POINT_SIGNAL": "name",
+            "ASSOCIATED_TO_WIFI_DEVICE_SNAPSHOT_LAST": "name",
+            "CONNECTED_TO_AP_SNAPSHOT_WIFI_DEVICE_SNAPSHOT": "name",
+            "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST": "name",
+            "ASSOCIATED_TO_CLIENT_PERFORMANCE": "name",
+            "ASSOCIATED_TO_WIFI_DEVICE_SECURITY_POSTURE": "name",
+            "HAS_SAME_ISOLATED_SUB_NET": "name",
+            "CONNECTED_TO_AP_SNAPSHOT_WIFI_BRIDGE_SNAPSHOT": "name",
+            "BEACONED_SSID_AP": "name",
+            "NEXT_WIFI_BRIDGE_SNAPSHOT": "name",
+            "ASSOCIATED_TO_WIFI_DEVICE_MOBILITY": "name",
+            "ASSOCIATED_TO_CLIENT_SNAPSHOT_FIRST": "name",
+            "ASSOCIATED_TO_WIFI_BRIDGE_PERFORMANCE": "name",
+            "CONNECTED_TO_AP_SNAPSHOT_CLIENT_SNAPSHOT": "name",
+            "ASSOCIATED_TO_WIFI_DEVICE_SNAPSHOT_FIRST": "name",
+            "ASSOCIATED_TO_CLIENT_SIGNAL": "name",
+            "ASSOCIATED_TO_WIFI_DEVICE_PERFORMANCE": "name",
+            "ASSOCIATED_TO_WIFI_BRIDGE_SIGNAL": "name",
+            "ASSOCIATED_TO_SSID_SNAPSHOT_FIRST": "name",
+            "ASSOCIATED_TO_WIFI_BRIDGE_SNAPSHOT_FIRST": "name",
+            "NEXT_ACCESS_POINT_SNAPSHOT": "name",
+            "NEXT_WIFI_DEVICE_SNAPSHOT": "name",
+            "PROBING_FOR_SSID_AP": "name",
+            "ASSOCIATED_TO_WIFI_BRIDGE_SECURITY_POSTURE": "name",
+            "ASSOCIATED_TO_ACCESS_POINT_DEVICE_MOBILITY": "name",
+            "ASSOCIATED_TO_CLIENT_SNAPSHOT_LAST": "name",
+            "ASSOCIATED_TO_ACCESS_POINT_PERFORMANCE": "name",
+            "ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE": "name",
+            "ASSOCIATED_TO_CLIENT_DEVICE_MOBILITY": "name",
+            "ASSOCIATED_TO_CLIENT_SECURITY_POSTURE": "name",
+            "ADVERTISING_FOR_SSID_AP": "name",
+            "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST": "name",
+            "PROBING_FOR_SSID_CLIENT": "name",
+            "NEXT_CLIENT_SNAPSHOT": "name"
+          },
+          "settings": {
+            "fullscreenEnabled": true
+          },
+          "schema": [
+            [
+              "Access Point Security Posture",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Device Mobility",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "SSID Snapshot",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Bridge Signal",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Client Signal",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Access Point Signal",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Client Device Mobility",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Device Performance",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Device",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Bridge Snapshot",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "_Neodash_Dashboard",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Client Performance",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Access Point Device Mobility",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Bridge Performance",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Client",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "SSID",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Client Security Posture",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Bridge",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Device Security Posture",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Access Point",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Device Signal",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Bridge Security Posture",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Bridge Device Mobility",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Client Snapshot",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Access Point Performance",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "Access Point Snapshot",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "WIFI Device Snapshot",
+              "name",
+              "indexes",
+              "constraints"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_BRIDGE_DEVICE_MOBILITY",
+              "name"
+            ],
+            [
+              "NEXT_SSID_SNAPSHOT",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_DEVICE_SIGNAL",
+              "name"
+            ],
+            [
+              "RESPONDING_FOR_SSID_AP",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_BRIDGE_SNAPSHOT_LAST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_SSID_SNAPSHOT_LAST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SIGNAL",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_DEVICE_SNAPSHOT_LAST",
+              "name"
+            ],
+            [
+              "CONNECTED_TO_AP_SNAPSHOT_WIFI_DEVICE_SNAPSHOT",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_CLIENT_PERFORMANCE",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_DEVICE_SECURITY_POSTURE",
+              "name"
+            ],
+            [
+              "HAS_SAME_ISOLATED_SUB_NET",
+              "name"
+            ],
+            [
+              "CONNECTED_TO_AP_SNAPSHOT_WIFI_BRIDGE_SNAPSHOT",
+              "name"
+            ],
+            [
+              "BEACONED_SSID_AP",
+              "name"
+            ],
+            [
+              "NEXT_WIFI_BRIDGE_SNAPSHOT",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_DEVICE_MOBILITY",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_CLIENT_SNAPSHOT_FIRST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_BRIDGE_PERFORMANCE",
+              "name"
+            ],
+            [
+              "CONNECTED_TO_AP_SNAPSHOT_CLIENT_SNAPSHOT",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_DEVICE_SNAPSHOT_FIRST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_CLIENT_SIGNAL",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_DEVICE_PERFORMANCE",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_BRIDGE_SIGNAL",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_SSID_SNAPSHOT_FIRST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_BRIDGE_SNAPSHOT_FIRST",
+              "name"
+            ],
+            [
+              "NEXT_ACCESS_POINT_SNAPSHOT",
+              "name"
+            ],
+            [
+              "NEXT_WIFI_DEVICE_SNAPSHOT",
+              "name"
+            ],
+            [
+              "PROBING_FOR_SSID_AP",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_WIFI_BRIDGE_SECURITY_POSTURE",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_DEVICE_MOBILITY",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_CLIENT_SNAPSHOT_LAST",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_PERFORMANCE",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_CLIENT_DEVICE_MOBILITY",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_CLIENT_SECURITY_POSTURE",
+              "name"
+            ],
+            [
+              "ADVERTISING_FOR_SSID_AP",
+              "name"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST",
+              "name"
+            ],
+            [
+              "PROBING_FOR_SSID_CLIENT",
+              "name"
+            ],
+            [
+              "NEXT_CLIENT_SNAPSHOT",
+              "name"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Client Overview",
+      "reports": [
+        {
+          "id": "651ad53b-d025-4460-9be3-44886e547652",
+          "title": "Total",
+          "query": "MATCH (cli:Client) RETURN count(cli)\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "textAlign": "center",
+            "verticalAlign": "middle",
+            "description": "- Count of Clients "
+          },
+          "schema": []
+        },
+        {
+          "id": "d3022bf7-5599-4527-8ae1-f6e2bf382953",
+          "title": "Details",
+          "query": "MATCH (cli:Client)-[:`ASSOCIATED_TO_CLIENT_SNAPSHOT_LAST`]->(csnap:`Client Snapshot`)-[:`ASSOCIATED_TO_CLIENT_SIGNAL`]->(cs:`Client Signal`)\nWITH cli.clientCname as ClientCanonicalName, cli.clientKey as ClientKey, cli.clientManufac as Manufacturer, csnap.csnapLbssid as LastBSSID,  cs.csMax as SignalStrenght, csnap.csnapTimestamp as LastSnapshotTimeStamp, cli as cli\nMATCH(cli)-[:`ASSOCIATED_TO_CLIENT_SNAPSHOT_FIRST`]->(:`Client Snapshot`)-[r:`NEXT_CLIENT_SNAPSHOT`*]->()\nRETURN ClientCanonicalName ,ClientKey,Manufacturer,LastBSSID,SignalStrenght, count(r)+1 as TotalSnapshots,LastSnapshotTimeStamp\n\n\n",
+          "width": 18,
+          "height": 7,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "columnWidths": "[3,4,3,2,2,2,3]",
+            "actionsRules": [
+              {
+                "condition": "Click",
+                "field": "ClientCanonicalName",
+                "value": "ClientCanonicalName",
+                "customization": "set variable",
+                "customizationValue": "clientCname"
+              }
+            ],
+            "fullscreenEnabled": true
+          }
+        },
+        {
+          "id": "8693a325-803e-4dc5-aebb-78d7506491dd",
+          "title": "Manufacturer",
+          "query": "MATCH (cli:Client) return cli.clientManufac as Manufacturer, count(cli) as Quantity ORDER BY Quantity desc\n\n\n",
+          "width": 6,
+          "height": 5,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "columnWidths": "[3,2]",
+            "fullscreenEnabled": true
+          }
+        },
+        {
+          "id": "5ba5468f-7c3d-42af-abf9-f36af6b5f69f",
+          "title": "Client Jouney",
+          "query": "MATCH path = (:Client {clientCname:$neodash_clientCname})-[:`ASSOCIATED_TO_CLIENT_SNAPSHOT_FIRST`]->(c1:`Client Snapshot`)-[r:`NEXT_CLIENT_SNAPSHOT`*]->()-[:`ASSOCIATED_TO_CLIENT_SIGNAL`]-(),path2= (c1)-[:`ASSOCIATED_TO_CLIENT_SIGNAL`]-() return *\n",
+          "width": 24,
+          "height": 6,
+          "x": 0,
+          "y": 7,
+          "type": "graph",
+          "selection": {
+            "Client Snapshot": "(label)",
+            "Client": "(label)",
+            "Client Signal": "(label)"
+          },
+          "settings": {
+            "layout": "tree-left-right"
+          },
+          "schema": [
+            [
+              "Client Snapshot",
+              "csnapModtime",
+              "csnapFirstseen",
+              "csnapLastseen",
+              "csnapLbssid",
+              "csnapTimestamp",
+              "csnapKey",
+              "csnapSignalstr",
+              "csnapNcaps",
+              "csnapId",
+              "csnapNprssid",
+              "wccFullvalue"
+            ],
+            [
+              "Client",
+              "clientType",
+              "clientMac",
+              "clientName",
+              "clientKey",
+              "clientPhy",
+              "clientCname",
+              "clientManufac",
+              "wccFullvalue"
+            ],
+            [
+              "Client Signal",
+              "csChannel",
+              "csId",
+              "csFrequency",
+              "csMin",
+              "csMax",
+              "csLast",
+              "wccFullvalue"
+            ],
+            [
+              "NEXT_CLIENT_SNAPSHOT"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Access Point Overview",
+      "reports": [
+        {
+          "id": "79736142-4134-4b67-a787-e627736fd575",
+          "title": "Total",
+          "query": "MATCH (a:`Access Point`) RETURN count(a) as acesscount\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "textAlign": "center",
+            "verticalAlign": "middle",
+            "description": "Count of Access Point"
+          },
+          "schema": []
+        },
+        {
+          "id": "ff404815-1238-4278-bf23-a4287ecf298e",
+          "title": "Details",
+          "query": "MATCH (acessp:`Access Point`)-[:`ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST`]->(csnap:`Access Point Snapshot`)-[:`ASSOCIATED_TO_ACCESS_POINT_SIGNAL`]->(cs:`Access Point Signal`) , (asp:`Access Point Security Posture`)<-[:ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE]-(csnap)\n\nWITH acessp.apCname as ApCanonicalName, acessp.apKey as ApKey, acessp.apManufac as Manufacturer, csnap.apsnapLbssid as LastBSSID,  cs.apMax as SignalStrenght, csnap.apsnapTimestamp as LastSnapshotTimeStamp, acessp as acessp, asp.apCrypt as Encryption\n\nOPTIONAL MATCH(acessp)-[:`ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST`]->(:`Access Point Snapshot`)-[r:`NEXT_ACCESS_POINT_SNAPSHOT`*]->()\nRETURN ApCanonicalName ,ApKey,Manufacturer,LastBSSID,SignalStrenght,Encryption, count(r)+1 as TotalSnapshots,LastSnapshotTimeStamp\n",
+          "width": 18,
+          "height": 7,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true,
+            "allowDownload": true,
+            "columnWidths": "[3,3,3,3,2,2,2,3]"
+          }
+        },
+        {
+          "id": "848ae027-2ca2-467c-8ff6-081a08d25e6f",
+          "title": "Manufacturer",
+          "query": "MATCH (a:`Access Point`) RETURN a.apManufac as Manufacturer, count(a) as Quantity order by Quantity desc\n\n\n",
+          "width": 6,
+          "height": 5,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "columnWidths": "[3,2]",
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true
+          }
+        }
+      ]
+    },
+    {
+      "title": "Wifi Device Overview",
+      "reports": [
+        {
+          "id": "b38ac1b3-c343-4b11-8b52-077667933e63",
+          "title": "Total",
+          "query": "MATCH (w:`WIFI Device`) RETURN count(w) as count\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "textAlign": "center",
+            "verticalAlign": "middle",
+            "description": "Count of Wifi Devices"
+          },
+          "schema": []
+        },
+        {
+          "id": "7862b4ec-8920-421c-8435-81f227e6e6e0",
+          "title": "Details",
+          "query": "MATCH (wifid:`WIFI Device`)-[:`ASSOCIATED_TO_WIFI_DEVICE_SNAPSHOT_LAST`]->(csnap:`WIFI Device Snapshot`)-[:`ASSOCIATED_TO_WIFI_DEVICE_SIGNAL`]->(cs:`WIFI Device Signal`)\nWITH wifid.deviceCname as DeviceCanonicalName, wifid.deviceKey as DeviceKey, wifid.deviceManufac as Manufacturer, csnap.devicesnapLbssid as LastBSSID,  cs.devicesignalMax as SignalStrenght, csnap.devicesnapTimestamp as LastSnapshotTimeStamp, wifid as wifid\nOPTIONAL MATCH(wifid)-[:`ASSOCIATED_TO_WIFI_DEVICE_SNAPSHOT_FIRST`]->(:`WIFI Device Snapshot`)-[r:`NEXT_WIFI_DEVICE_SNAPSHOT`*]->()\nRETURN DeviceCanonicalName ,DeviceKey,Manufacturer,LastBSSID,SignalStrenght, count(r)+1 as TotalSnapshots,LastSnapshotTimeStamp\n\n\n",
+          "width": 18,
+          "height": 7,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "fullscreenEnabled": true,
+            "refreshButtonEnabled": true,
+            "columnWidths": "[3,3,3,3,2,2,3]",
+            "allowDownload": true
+          }
+        },
+        {
+          "id": "56fb077f-b315-4d9d-afc7-7d4c895c2f8e",
+          "title": "Manufacturer",
+          "query": "MATCH (w:`WIFI Device`) RETURN w.deviceManufac as Manufacturer, count(w) as Quantity order by Quantity DESC\n\n\n",
+          "width": 6,
+          "height": 5,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "columnWidths": "[3,2]",
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true
+          }
+        }
+      ]
+    },
+    {
+      "title": "Wifi Bridge Overview",
+      "reports": [
+        {
+          "id": "3325c647-d055-449e-ac29-820b70e43889",
+          "title": "Total",
+          "query": "MATCH (wb:`WIFI Bridge`) RETURN count(wb) as Quantity\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "textAlign": "center",
+            "verticalAlign": "middle",
+            "description": "Count of Wifi Bridges"
+          },
+          "schema": []
+        },
+        {
+          "id": "53650195-93f7-44c9-b420-e462ac823eb8",
+          "title": "Details",
+          "query": "MATCH (wifid:`WIFI Bridge`)-[:`ASSOCIATED_TO_WIFI_BRIDGE_SNAPSHOT_LAST`]->(csnap:`WIFI Bridge Snapshot`)-[:`ASSOCIATED_TO_WIFI_BRIDGE_SIGNAL`]->(cs:`WIFI Bridge Signal`)\nWITH wifid.brdCname as BridgeCanonicalName, wifid.brdKey as BridgeKey, wifid.brdManufac as Manufacturer, csnap.brdsnapLbssid as LastBSSID,  cs.brdMax as SignalStrenght, csnap.brdsnapTimestamp as LastSnapshotTimeStamp, wifid as wifid\nOPTIONAL MATCH(wifid)-[:`ASSOCIATED_TO_WIFI_BRIDGE_SNAPSHOT_FIRST`]->(:`WIFI Bridge Snapshot`)-[r:`NEXT_WIFI_BRIDGE_SNAPSHOT`*]->()\nRETURN BridgeCanonicalName ,BridgeKey,Manufacturer,LastBSSID,SignalStrenght, count(r)+1 as TotalSnapshots,LastSnapshotTimeStamp\n\n\n\n",
+          "width": 18,
+          "height": 7,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "fullscreenEnabled": true,
+            "refreshButtonEnabled": true,
+            "columnWidths": "[3,3,3,3,2,2,3]",
+            "allowDownload": true
+          }
+        },
+        {
+          "id": "8bb511f5-fb66-4ff9-b04f-01dc9745ca1a",
+          "title": "Manufacturer",
+          "query": "MATCH (wb:`WIFI Bridge`) RETURN wb.brdManufac as Manufacturer, count(wb) as Quantity ORDER BY Quantity DESC\n\n\n",
+          "width": 6,
+          "height": 5,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "columnWidths": "[3,2]",
+            "fullscreenEnabled": true,
+            "refreshButtonEnabled": true
+          }
+        }
+      ]
+    },
+    {
+      "title": "SSID Overview",
+      "reports": [
+        {
+          "id": "dbad15f9-4d31-427b-863b-b0bf6e865483",
+          "title": "Total",
+          "query": "MATCH (s:SSID) RETURN count(s) as quantity\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "textAlign": "center",
+            "verticalAlign": "middle",
+            "description": "Count of SSID"
+          },
+          "schema": []
+        },
+        {
+          "id": "8049a7d0-4ba3-49f2-84a1-c95f715b41eb",
+          "title": "Details",
+          "query": "MATCH (s:SSID)-[:`ASSOCIATED_TO_SSID_SNAPSHOT_LAST`]->(snap:`SSID Snapshot`)\nRETURN s.ssidName as SSIDName, s.ssidHash as SSIDHash, s.ssidEncryptionitem as SSIDEncryption, s.ssidProbingdvlen as TotalProbingDevices, s.ssideRespdvlen as TotalRespondingDevices, snap.ssidsnapTimestamp as LastSnapshotTimeStamp\n",
+          "width": 18,
+          "height": 7,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true,
+            "allowDownload": true
+          }
+        },
+        {
+          "id": "0ea5f11b-062b-42d7-8997-6954001f1207",
+          "title": "Type of Encryption",
+          "query": "MATCH (s:SSID) RETURN  s.ssidEncryptionitem as SSIDEncryption, count(s) as Quantity\n\n\n",
+          "width": 6,
+          "height": 5,
+          "x": 0,
+          "y": 2,
+          "type": "pie",
+          "selection": {
+            "index": "SSIDEncryption",
+            "value": "Quantity",
+            "key": "(none)"
+          },
+          "settings": {
+            "cornerRadius": 0,
+            "innerRadius": 0.5,
+            "legend": false,
+            "arcLabelsFontSize": 10,
+            "sortByValue": true,
+            "marginLeft": 100,
+            "marginRight": 100,
+            "marginTop": 70,
+            "marginBottom": 70
+          },
+          "schema": []
+        }
+      ]
+    },
+    {
+      "title": "CG Groups",
+      "reports": [
+        {
+          "id": "1373f398-4dc0-4ce4-8f7d-a827ad4d6dbb",
+          "title": "Total",
+          "query": "MATCH (n)\nWHERE n.wccFullvalue IS NOT NULL\nRETURN COUNT(DISTINCT n.wccFullvalue) AS distinctWccValues\n\n\n",
+          "width": 6,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "value",
+          "selection": {},
+          "settings": {
+            "textAlign": "center",
+            "verticalAlign": "middle"
+          },
+          "schema": []
+        },
+        {
+          "id": "eaaeede6-a047-416a-a9c2-816a56bfc98d",
+          "title": "All CGs",
+          "query": "MATCH (n)\nWHERE n.wccFullvalue IS NOT NULL\nRETURN n.wccFullvalue AS Value, COUNT(n) AS NodeCount\nORDER BY NodeCount DESC\n\n\n\n",
+          "width": 6,
+          "height": 4,
+          "x": 0,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true,
+            "downloadImageEnabled": false,
+            "allowDownload": true
+          }
+        },
+        {
+          "id": "76639cf2-ce46-4632-8e0e-2154ce316485",
+          "title": "Search CG Value",
+          "query": "RETURN toInteger($input)\n\n\n",
+          "width": 18,
+          "height": 2,
+          "x": 6,
+          "y": 0,
+          "type": "select",
+          "selection": {},
+          "settings": {
+            "type": "Custom Query",
+            "entityType": "wccFullvalue",
+            "parameterName": "neodash_wccfullvalue"
+          },
+          "schema": []
+        },
+        {
+          "id": "c85aefd6-d6f4-4864-9a95-95093bb693a4",
+          "title": "",
+          "query": "MATCH (n)\nWHERE n.wccFullvalue = $neodash_wccfullvalue\nRETURN n AS Node, [key IN keys(n) | key + ': ' + n[key]] AS PropertiesList\n\n\n",
+          "width": 18,
+          "height": 4,
+          "x": 6,
+          "y": 2,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "refreshButtonEnabled": true,
+            "fullscreenEnabled": true,
+            "downloadImageEnabled": false,
+            "allowDownload": true,
+            "columnWidths": "[1,4]"
+          }
+        },
+        {
+          "id": "ee8516a0-99ad-438a-afe9-81208d6a2476",
+          "title": "Search CG Result Graph",
+          "query": "MATCH (n)\nWHERE n.wccFullvalue = $neodash_wccfullvalue\nOPTIONAL MATCH (n)-[r]-(m)\nWHERE m.wccFullvalue = $neodash_wccfullvalue AND type(r) <> 'HAS_SAME_ISOLATED_SUB_NET'\nRETURN n, r, m\n\n\n\n",
+          "width": 24,
+          "height": 6,
+          "x": 0,
+          "y": 6,
+          "type": "graph",
+          "selection": {
+            "Access Point": "(label)",
+            "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST": "(label)",
+            "Access Point Snapshot": "(label)",
+            "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST": "(label)",
+            "ASSOCIATED_TO_ACCESS_POINT_SIGNAL": "(label)",
+            "Access Point Signal": "(label)",
+            "ASSOCIATED_TO_ACCESS_POINT_PERFORMANCE": "(label)",
+            "Access Point Performance": "(label)",
+            "ASSOCIATED_TO_ACCESS_POINT_DEVICE_MOBILITY": "(label)",
+            "Access Point Device Mobility": "(label)",
+            "ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE": "(label)",
+            "Access Point Security Posture": "(label)",
+            "BEACONED_SSID_AP": "(label)",
+            "SSID Snapshot": "(label)",
+            "ADVERTISING_FOR_SSID_AP": "(label)",
+            "SSID": "(label)",
+            "ASSOCIATED_TO_SSID_SNAPSHOT_FIRST": "(label)",
+            "ASSOCIATED_TO_SSID_SNAPSHOT_LAST": "(label)"
+          },
+          "settings": {
+            "fullscreenEnabled": true,
+            "downloadImageEnabled": true
+          },
+          "schema": [
+            [
+              "Access Point",
+              "apType",
+              "apCname",
+              "apManufac",
+              "apPhy",
+              "apMac",
+              "apKey",
+              "apName",
+              "wccFullvalue"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST"
+            ],
+            [
+              "Access Point Snapshot",
+              "apsnapLbssid",
+              "apsnapId",
+              "apsnapFirstseen",
+              "apsnapSignalstr",
+              "apsnapLastseen",
+              "apsnapKey",
+              "apsnapNprssid",
+              "apsnapNcaps",
+              "apsnapTimestamp",
+              "apsnapModtime",
+              "wccFullvalue"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SIGNAL"
+            ],
+            [
+              "Access Point Signal",
+              "apLast",
+              "apChannel",
+              "apFrequency",
+              "apId",
+              "apMin",
+              "apMax",
+              "wccFullvalue"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_PERFORMANCE"
+            ],
+            [
+              "Access Point Performance",
+              "apDatasizeretry",
+              "apLinkmeasure",
+              "apDatasize",
+              "apId",
+              "apMaxtxpw",
+              "apMintxpw",
+              "wccFullvalue"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_DEVICE_MOBILITY"
+            ],
+            [
+              "Access Point Device Mobility",
+              "apId",
+              "apSignalchange",
+              "apKey",
+              "apFirstseen",
+              "apSeenbycount",
+              "apLastbssid",
+              "apLastseen",
+              "wccFullvalue"
+            ],
+            [
+              "ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE"
+            ],
+            [
+              "Access Point Security Posture",
+              "apWpslast",
+              "apId",
+              "apNfrag",
+              "apKey",
+              "apLastbssid",
+              "apWpscount",
+              "apCrypt",
+              "apProbedSSIDs",
+              "apNretries",
+              "wccFullvalue"
+            ],
+            [
+              "BEACONED_SSID_AP"
+            ],
+            [
+              "SSID Snapshot",
+              "ssidsnapRespondingdevices",
+              "ssidsnapHash",
+              "ssidsnapAdvertisingdevices",
+              "ssidsnapProbingDevices",
+              "ssidsnapTimestamp",
+              "ssidsnapName",
+              "ssidsnapId",
+              "wccFullvalue"
+            ],
+            [
+              "ADVERTISING_FOR_SSID_AP"
+            ],
+            [
+              "SSID",
+              "ssidName",
+              "ssidLastseen",
+              "ssidFirstseen",
+              "ssideRespdvlen",
+              "ssidProbingdvlen",
+              "ssidEncryption",
+              "ssidEncryptionitem",
+              "ssidHash",
+              "ssidAdvdvlen",
+              "wccFullvalue"
+            ],
+            [
+              "ASSOCIATED_TO_SSID_SNAPSHOT_FIRST"
+            ],
+            [
+              "ASSOCIATED_TO_SSID_SNAPSHOT_LAST"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Cybersec Alert Hub",
+      "reports": [
+        {
+          "id": "11c4b6ea-767b-4bb1-893c-30e2d325e18b",
+          "title": "Unsecure Network Total",
+          "query": "MATCH (ap:`Access Point`)\n-[:ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST|ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST]\n->(apsnap:`Access Point Snapshot`)\n-[:`ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE`]\n->(aps:`Access Point Security Posture`)\nWHERE aps.apCrypt IN ['WEP', 'Open']\nRETURN aps.apCrypt AS EncryptionType, COUNT(DISTINCT ap) AS AccessPointCount\n\n\n\n",
+          "width": 6,
+          "height": 7,
+          "x": 0,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {}
+        },
+        {
+          "id": "2d2935e5-9a8c-4cf6-81f0-4601554e6375",
+          "title": "Unsecure Network List",
+          "query": "MATCH (ap:`Access Point`)\n-[:ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_FIRST]\n->(firstSnapshot:`Access Point Snapshot`)\n-[:ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE]\n->(apFirstSecPosture:`Access Point Security Posture`)\n\nMATCH (ap)-[:ASSOCIATED_TO_ACCESS_POINT_SNAPSHOT_LAST]\n->(lastSnapshot:`Access Point Snapshot`)\n-[:ASSOCIATED_TO_ACCESS_POINT_SECURITY_POSTURE]\n->(apSecPosture:`Access Point Security Posture`)\n\nWHERE apSecPosture.apCrypt IN ['WEP', 'Open']\n\nOPTIONAL MATCH (firstSnapshot)-[r:NEXT_ACCESS_POINT_SNAPSHOT*]\n->(intermediateSnapshot)\n\nWITH ap, firstSnapshot, lastSnapshot, apSecPosture,\n     COUNT(DISTINCT intermediateSnapshot) AS totalIntermediateSnapshots\n\nRETURN \n    ap.apCname AS ApCanonicalName, \n    ap.apKey AS ApKey, \n    ap.apManufac AS Manufacturer, \n    lastSnapshot.apsnapLbssid AS LastBSSID, \n    lastSnapshot.apsnapSignalstr AS SignalStrength,\n    apSecPosture.apCrypt AS Encryption, // Encryption type of the last snapshot\n    totalIntermediateSnapshots + 1 AS TotalSnapshots, // +1 to include the first snapshot in the count\n    lastSnapshot.apsnapTimestamp AS LastSnapshotTimestamp\nORDER BY LastSnapshotTimestamp DESC;\n\n\n\n\n",
+          "width": 18,
+          "height": 7,
+          "x": 6,
+          "y": 0,
+          "type": "table",
+          "selection": {},
+          "settings": {
+            "styleRules": [
+              {
+                "field": "Encryption",
+                "condition": "=",
+                "value": "WEP",
+                "customization": "row color",
+                "customizationValue": "#F14646B5"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Cybersec LLM",
+      "reports": [
+        {
+          "id": "3ac87ce4-cf0e-4b24-a800-afd582e2fbd9",
+          "title": "Cybersecurity LLM Chatbot",
+          "query": "https://streamlit-demo-airneokg-app-latam-1055617507124.us-central1.run.app/\n\n\n",
+          "width": 24,
+          "height": 8,
+          "x": 0,
+          "y": 0,
+          "type": "iframe",
+          "selection": {},
+          "settings": {},
+          "schema": []
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {
+    "active": true,
+    "activeReducers": [],
+    "advanced-charts": {
+      "active": true
+    },
+    "styling": {
+      "active": true
+    },
+    "actions": {
+      "active": true
+    }
+  },
+  "uuid": "d2237ba1-1572-4daf-aaa7-ad0addb55e06"
+}
